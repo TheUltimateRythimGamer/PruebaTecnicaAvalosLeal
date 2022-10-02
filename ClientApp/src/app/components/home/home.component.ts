@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
@@ -8,7 +9,10 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private spinner: NgxSpinnerService) { }
+  constructor(
+    private spinner: NgxSpinnerService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     // this.spinner.show();
@@ -16,6 +20,10 @@ export class HomeComponent implements OnInit {
     // setTimeout(() => {
     //   this.spinner.hide();
     // }, 2000);
+  }
+
+  public Add(id: number) {
+    this.router.navigateByUrl('detail/' + id)
   }
 
 }

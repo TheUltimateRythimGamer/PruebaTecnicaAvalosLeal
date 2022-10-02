@@ -1,1 +1,69 @@
-<p>details works!</p>
+<div class="general">
+    <h2 style="color: black;">Detalle</h2>
+    <form [formGroup]="formDetalle" class="m-form m-form--fit m-form--label-align-left">
+        <div class="form-group m-form__group row" style="padding-left:0px">
+            <div class="col-lg-4">
+                <label for="TxtFecha">Fecha</label>
+                <input type="text" class="form-control m-input" id="TxtFecha" readonly formControlName="TxtFecha">
+            </div>
+            <div class="col-lg-4">
+                <label for="TxtNombre">Nombre</label>
+                <input type="text" class="form-control m-input" id="TxtNombre" formControlName="TxtNombre" required>
+                <div *ngIf="TxtNombre?.invalid && (TxtNombre?.dirty || TxtNombre?.touched)"
+                    class="alert alert-danger mt-1">
+                    <div *ngIf="TxtNombre?.errors?.['required']">
+                        El nombre es requerido
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <label for="TxtDireccion">Dirección</label>
+                <input type="text" class="form-control m-input" id="TxtDireccion" formControlName="TxtDireccion">
+                <div *ngIf="TxtDireccion?.invalid && (TxtDireccion?.dirty || TxtDireccion?.touched)"
+                    class="alert alert-danger mt-1">
+                    <div *ngIf="TxtDireccion?.errors?.['required']">
+                        La dirección es requerida
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group m-form__group row" style="padding-left:0px">
+            <div class="col-lg-4">
+                <label for="TxtTelefono">Teléfono</label>
+                <input type="text" class="form-control m-input" id="TxtTelefono" formControlName="TxtTelefono">
+                <div *ngIf="TxtTelefono?.invalid && (TxtTelefono?.dirty || TxtTelefono?.touched)"
+                    class="alert alert-danger mt-1">
+                    <div *ngIf="TxtTelefono?.errors?.['required']">
+                        El teléfono es requerido
+                    </div>
+                    <div *ngIf="TxtTelefono?.errors?.['pattern']">
+                        El patron es incorrecto
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <label for="TxtCURP">CURP</label>
+                <input type="text" class="form-control m-input" id="TxtCurp" formControlName="TxtCurp">
+                <div *ngIf="TxtCurp?.invalid && (TxtCurp?.dirty || TxtCurp?.touched)" class="alert alert-danger mt-1">
+                    <div *ngIf="TxtCurp?.errors?.['required']">
+                        El curp es requerido
+                    </div>
+                    <div *ngIf="TxtCurp?.errors?.['pattern']">
+                        El patron es incorrecto
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group m-form__group row" style="padding-left:0px">
+            <div class="col-lg-6">
+                <button class="btn btn-success btn-lg btn-block" style="margin-top: 25px; width: 100%;"
+                    (click)="Guardar()">Guardar</button>
+            </div>
+            <div class="col-lg-6">
+                <button class="btn btn-danger btn-lg btn-block" style="margin-top: 25px; width: 100%;"
+                    (click)="Cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>
