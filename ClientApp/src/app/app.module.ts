@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { DetailsComponent } from './components/details/details.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchPipe } from './pipes/search.pipe';
+import { ExcelService } from './services/Excel/excel.service';
 
 /**
  * Al ser una aplicacion pequeña se utilizaran los archivos de env normales de angular
@@ -33,7 +34,9 @@ import { SearchPipe } from './pipes/search.pipe';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ExcelService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

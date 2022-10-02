@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
 import { CSVRecord } from 'src/app/models/CSVRecord.model';
+import { ExcelService } from 'src/app/services/Excel/excel.service';
 import { UsersService } from 'src/app/services/Users/users.service';
 import Swal from 'sweetalert2';
 
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router,
     private userService: UsersService,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit(): void {
@@ -86,6 +88,10 @@ export class HomeComponent implements OnInit {
         })
       }
     })
+  }
+
+  public Exportar(): void {
+    this.excelService.exportAsExcelFile(this.data, 'users_data');
   }
 
   public UploadCSV($event: any): void {
