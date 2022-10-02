@@ -44,6 +44,30 @@ export class DetailsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = Number(params["id"]);
     });
+    if (this.id != 0)
+      this.loadData(this.id);
+  }
+
+  private loadData(id: number): void {
+    this.userService.loadDataById(id).subscribe((data: any) => {
+      this.spinner.show();
+      this.TxtFecha?.setValue(data.user.fechaRegistro);
+      this.TxtCurp?.setValue(data.user.curp);
+      this.TxtDireccion?.setValue(data.user.direccion);
+      this.TxtNombre?.setValue(data.user.nombre);
+      this.TxtTelefono?.setValue(data.user.telefono);
+      
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 500);
+    }, (error) => {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Algunos campos estan incompletos o tienen errores en ellos',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    })
   }
 
   public Guardar(): void {
@@ -89,5 +113,5 @@ export class DetailsComponent implements OnInit {
   public Cancelar(): void {
     this.router.navigateByUrl('home');
   }
-  
+
 }

@@ -24,4 +24,8 @@ export class UsersService {
     return this.http.get<any>(`${environment.serverAPIURL}/Users`, this.httpOptions);
   }
 
+  loadDataById(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.serverAPIURL}/Users/${id}`, this.httpOptions);
+  }
+
 }
