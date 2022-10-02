@@ -28,4 +28,8 @@ export class UsersService {
     return this.http.get<any>(`${environment.serverAPIURL}/Users/${id}`, this.httpOptions);
   }
 
+  Eliminar(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.serverAPIURL}/Users/${id}`, this.httpOptions);
+  }
+
 }

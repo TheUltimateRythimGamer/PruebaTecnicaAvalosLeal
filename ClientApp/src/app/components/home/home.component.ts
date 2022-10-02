@@ -57,4 +57,33 @@ export class HomeComponent implements OnInit {
 
   }
 
+  Delete(id: number) {
+    Swal.fire({
+      title: 'Segurx de eliminar?',
+      text: 'Este cambio no se podria deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Eliminalo',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Eliminado',
+          'Se ha eliminado con exito',
+          'success'
+        )
+        this.userService.Eliminar(id).subscribe((data: any) => {
+          this.loadData();
+        }, (error) => {
+          Swal.fire({
+            title: 'Error!',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        })
+      }
+    })
+  }
+
 }
