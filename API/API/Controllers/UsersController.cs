@@ -74,7 +74,6 @@ namespace API.Controllers
             }
         }
 
-
         [HttpDelete]
         [Route("{id}")]
         public async Task<ActionResult> Eliminar([FromRoute] int id)
@@ -88,6 +87,45 @@ namespace API.Controllers
                     return Ok(new { mensaje = "OK" });
                 else
                     return BadRequest(new { mensaje = "Error al guardar" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("CargaCSV")]
+        public async Task<ActionResult> CargaCSV([FromBody] CargaCSVRequest request)
+        {
+            try
+            {
+                List<User> registros = new List<User>();
+                request.Registros.ForEach(x =>
+                {
+                    User model = new User()
+                    {
+                        ID = 0,
+                        bEliminado = false,
+                        dtFechaRegistro = x.Fecha,
+                        sCurp = x.Curp,
+                        sDireccion = x.Direccion,
+                        sNombre = x.Nombre,
+                        sTelefono = x.Telefono
+                    };
+                    registros.Add(model);
+                });
+
+                bool exito = false;
+                registros.ForEach( model =>
+                {
+                    exito = usersService.Guardar(model).Result;
+                });
+
+                if (exito)
+                    return Ok(new { mensaje = "OK" });
+                else
+                    return BadRequest(new { mensaje = "Error al guardar por carga CSV" });
             }
             catch (Exception ex)
             {

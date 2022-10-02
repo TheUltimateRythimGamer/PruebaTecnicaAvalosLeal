@@ -18,7 +18,12 @@
             <button class="btn btn-primary btn-md" style="width: 30%; margin-right: 5%;"
                 (click)="Add(0)">Añadir</button>
             <button class="btn btn-success" style="width: 30%; margin-right: 5%;">Exportar</button>
-            <button class="btn btn-info" style="width: 30%; color: white;">Importar</button>
+            <div class="btn btn-info">
+                <label for="txtFileUpload" style="color:white">Importar</label>
+                <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" accept=".csv" style="display: none;"
+                    (change)="UploadCSV($event)" />
+            </div>
+
         </div>
     </div>
 

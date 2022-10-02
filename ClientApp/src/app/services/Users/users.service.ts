@@ -32,4 +32,8 @@ export class UsersService {
     return this.http.delete<any>(`${environment.serverAPIURL}/Users/${id}`, this.httpOptions);
   }
 
+  CargaCSV(json: any): Observable<any> {
+    return this.http.post<any>(`${environment.serverAPIURL}/Users/CargaCSV`, json, this.httpOptions);
+  }
+
 }
