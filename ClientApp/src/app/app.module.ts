@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DetailsComponent } from './components/details/details.component';
 import { HomeComponent } from './components/home/home.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 /**
  * Al ser una aplicacion pequeña se utilizaran los archivos de env normales de angular
@@ -21,6 +22,7 @@ import { HomeComponent } from './components/home/home.component';
     AppComponent,
     HomeComponent,
     DetailsComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

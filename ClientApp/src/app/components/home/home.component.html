@@ -11,7 +11,7 @@
                     <span class="input-group-text" id="inputGroup-sizing-default">Buscar:</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default">
+                    aria-describedby="inputGroup-sizing-default" [(ngModel)]="search">
             </div>
         </div>
         <div class="col-lg-4">
@@ -34,7 +34,7 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody *ngFor="let item of data">
+        <tbody *ngFor="let item of data  | customSearch:search">
             <tr>
                 <td>{{item.id}}</td>
                 <td>{{item.nombre}}</td>

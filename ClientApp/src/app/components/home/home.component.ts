@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
 
   data: any[] = [];
 
+  search: string = "";
+
   constructor(
     private spinner: NgxSpinnerService,
     private router: Router,
