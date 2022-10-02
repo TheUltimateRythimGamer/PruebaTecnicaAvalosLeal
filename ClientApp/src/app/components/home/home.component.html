@@ -31,17 +31,26 @@
                 <th>Telefono</th>
                 <th>Curp</th>
                 <th>Fecha de registro</th>
+                <th>Acciones</th>
             </tr>
         </thead>
-        <!-- <tbody *ngFor="let dna of dnas">
+        <tbody *ngFor="let item of data">
             <tr>
-                <td>{{ dna.ChainValue }}</td>
-                <td>{{ dna.MutationCount}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.direccion}}</td>
+                <td>{{item.telefono}}</td>
+                <td>{{item.curp}}</td>
+                <td>{{item.fechaRegistro}}</td>
                 <td>
-                    <p *ngIf="dna.IsMutante == 1">Es mutación</p>
-                    <p *ngIf="dna.IsMutante == 0">No es mutación</p>
+                    <button class="btn btn-dark" style="margin-right:10px;">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
                 </td>
             </tr>
-        </tbody> -->
+        </tbody>
     </table>
 </div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { UsersService } from 'src/app/services/Users/users.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,7 +33,10 @@ export class DetailsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private userService: UsersService,
+    private spinner: NgxSpinnerService,
+
   ) { }
 
   ngOnInit(): void {
@@ -43,15 +48,34 @@ export class DetailsComponent implements OnInit {
 
   public Guardar(): void {
     if (this.formDetalle.valid) {
+      this.spinner.show();
       let json = {
-        id: this.id,
-        fecha: new Date(),
-        nombre: this.TxtNombre?.value,
-        direccion: this.TxtDireccion?.value,
-        telefono: this.TxtTelefono?.value,
-        curp: this.TxtCurp?.value
+        Id: this.id,
+        Fecha: new Date(),
+        Nombre: this.TxtNombre?.value,
+        Direccion: this.TxtDireccion?.value,
+        Telefono: this.TxtTelefono?.value,
+        Curp: this.TxtCurp?.value
       }
-      console.log(json);
+
+      this.userService.guardar(json).subscribe((data) => {
+        setTimeout(() => {
+          this.spinner.hide();
+          Swal.fire({
+            title: 'Guardado correcto!',
+            text: 'Se ha guardado la informacion correctamente',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          }).then((data) => {
+            this.router.navigateByUrl('home');
+          });
+        }, 1200);
+
+      }, (error) => {
+        console.log(error);
+        this.spinner.hide();
+      });
+
     } else {
       Swal.fire({
         title: 'Error!',
@@ -65,5 +89,5 @@ export class DetailsComponent implements OnInit {
   public Cancelar(): void {
     this.router.navigateByUrl('home');
   }
-
+  
 }

@@ -1,4 +1,5 @@
 using API.Context;
+using API.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,8 @@ builder.Services.AddDbContext<ContextDB>(options => options.UseSqlServer
     (builder.Configuration["connectionString"]).EnableSensitiveDataLogging()
 );
 
+builder.Services.AddScoped<IUserService, UsersService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,6 +38,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseCors(x => x
+       .AllowAnyOrigin()
+       .AllowAnyMethod()
+       .AllowAnyHeader());
 
 app.Run();
